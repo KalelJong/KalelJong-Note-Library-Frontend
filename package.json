@@ -9,17 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@primer/css": "^21.0.7",
+    "@primer/octicons-react": "19.5.0",
+    "@primer/react": "^35.27.1",
+    "@primer/react-brand": "^0.22.0",
     "@types/node": "20.4.10",
     "@types/react": "18.2.20",
     "@types/react-dom": "18.2.7",
     "autoprefixer": "10.4.14",
+    "deepmerge": "^4.3.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
-    "next": "13.4.13",
+    "next": "^13.4.13",
     "postcss": "8.4.27",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "1.65.1",
+    "styled-components": "^5.3.11",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
+  },
+  "devDependencies": {
+    "eslint-plugin-primer-react": "^4.0.1"
   }
 }
