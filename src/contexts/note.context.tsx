@@ -1,3 +1,4 @@
+"use client";
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { notes } from '../services/http.service';

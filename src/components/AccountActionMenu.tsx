@@ -1,5 +1,5 @@
 import { ActionList, ActionMenu, Avatar, Box, Link, Text } from '@primer/react';
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { logout } from '../services/auth.service';
 import { users } from '../services/http.service';
 import { User } from '../types/user.interface';

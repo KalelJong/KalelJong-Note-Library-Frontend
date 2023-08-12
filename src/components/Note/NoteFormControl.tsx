@@ -1,3 +1,5 @@
+import { useNoteContext } from '@/contexts/note.context';
+import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
 import { AlertIcon } from '@primer/octicons-react';
 import {
   Autocomplete,
@@ -6,9 +8,7 @@ import {
   TextInputWithTokens,
   Token,
 } from '@primer/react';
-import React, { useEffect, useState } from "react";
-import { useNoteContext } from '../../contexts/note.context';
-import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
+import { useEffect, useState } from "react";
 import { InputToken } from '../../types/inputToken.interface';
 import { Note } from '../../types/note.interface';
 import BlankStateSystemError from '../BlankState/BlankStateSystemError';

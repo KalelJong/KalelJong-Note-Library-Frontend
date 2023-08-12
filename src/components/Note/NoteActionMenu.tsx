@@ -1,11 +1,10 @@
+import { useNoteContext } from '@/contexts/note.context';
 import {
   KebabHorizontalIcon,
   PencilIcon,
   TrashIcon,
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, IconButton } from '@primer/react';
-import React from "react";
-import { useNoteContext } from '../../contexts/note.context';
 
 function NoteActionMenu({ note }: any) {
   const { openNoteDialog, setSelectedNote, confirmDeleteNote } =

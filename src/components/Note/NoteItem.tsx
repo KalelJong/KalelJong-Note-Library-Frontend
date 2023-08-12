@@ -1,8 +1,7 @@
+import { useNoteContext } from '@/contexts/note.context';
 import { PencilIcon, TrashIcon } from '@primer/octicons-react';
 import { Box, Button, ButtonGroup, Text } from '@primer/react';
 import { Hidden } from '@primer/react/drafts';
-import React from "react";
-import { useNoteContext } from '../../contexts/note.context';
 import NoteActionMenu from './NoteActionMenu';
 
 const NoteItem = ({ note }: any) => {

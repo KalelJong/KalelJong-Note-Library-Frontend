@@ -1,6 +1,5 @@
 import { CloudOfflineIcon } from '@primer/octicons-react';
 import { Box, Button, Heading, Text } from '@primer/react';
-import React from "react";
 
 function BlankStateBackendError() {
   return (

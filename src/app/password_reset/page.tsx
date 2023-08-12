@@ -1,3 +1,7 @@
+import LoginFooter from '@/components/Footer/LoginFooter';
+import LoginNavbar from '@/components/Navbar/LoginNavbar';
+import PasswordRequirementsText from '@/components/PasswordRequirementsText/PasswordRequirementsText';
+import { useAuthContext } from '@/contexts/auth.context';
 import {
   Box,
   Button,
@@ -8,10 +12,6 @@ import {
 } from '@primer/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import LoginFooter from '../../components/Footer/LoginFooter';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
-import PasswordRequirementsText from '../../components/PasswordRequirementsText/PasswordRequirementsText';
-import { useAuthContext } from '../../contexts/auth.context';
 import './main.css';
 
 const PasswordReset = () => {

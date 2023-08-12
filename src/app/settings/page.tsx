@@ -1,3 +1,10 @@
+import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
+import GeneralFlash from '@/components/Flash/GeneralFlash';
+import MainNavbar from '@/components/Navbar/MainNavbar';
+import { useAuthContext } from '@/contexts/auth.context';
+import { useGeneralContext } from '@/contexts/general.context';
+import { users } from '@/services/http.service';
+import { User } from '@/types/user.interface';
 import {
   AlertIcon
 } from '@primer/octicons-react';
@@ -17,13 +24,6 @@ import {
   TextInput
 } from '@primer/react';
 import React, { useEffect, useState } from 'react';
-import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
-import GeneralFlash from '../../components/Flash/GeneralFlash';
-import MainNavbar from '../../components/Navbar/MainNavbar';
-import { useAuthContext } from '../../contexts/auth.context';
-import { useGeneralContext } from '../../contexts/general.context';
-import { users } from '../../services/http.service';
-import { User } from '../../types/user.interface';
 import './main.css';
 
 const Settings = () => {

@@ -1,6 +1,5 @@
+import { useAuthContext } from '@/contexts/auth.context';
 import { Link, Text } from '@primer/react';
-import React from "react";
-import { useAuthContext } from '../../contexts/auth.context';
 
 const PasswordRequirementsText = () => {
   const { validations } = useAuthContext();

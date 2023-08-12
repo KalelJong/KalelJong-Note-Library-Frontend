@@ -1,6 +1,5 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { Link } from '@primer/react';
-import React from "react";
 
 const LoginNavbar = () => {
   return (

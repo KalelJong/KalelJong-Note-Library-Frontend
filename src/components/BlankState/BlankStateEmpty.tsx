@@ -1,7 +1,6 @@
+import { useNoteContext } from '@/contexts/note.context';
+import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
 import { Box, Button, Heading, Text } from '@primer/react';
-import React from "react";
-import { useNoteContext } from '../../contexts/note.context';
-import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
 
 function BlankStateEmpty() {
   const { openNoteDialog } = useNoteContext();

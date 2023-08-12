@@ -1,7 +1,7 @@
+import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
 import { Box, FormControl, Text, TextInput } from '@primer/react';
 import { Dialog, DialogButtonProps } from '@primer/react/drafts';
-import React, { useState } from "react";
-import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
+import { useState } from "react";
 import { Note } from '../../types/note.interface';
 import NotesFormControl from '../Note/NoteFormControl';
 

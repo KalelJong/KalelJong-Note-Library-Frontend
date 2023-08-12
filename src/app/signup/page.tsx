@@ -1,3 +1,13 @@
+import ValidationFlash, {
+  ValidationField,
+} from '@/components/Flash/ValidationFlash';
+import LoginFooter from '@/components/Footer/LoginFooter';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import LoginNavbar from '@/components/Navbar/LoginNavbar';
+import PasswordRequirementsText from '@/components/PasswordRequirementsText/PasswordRequirementsText';
+import { useAuthContext } from '@/contexts/auth.context';
+import { useGeneralContext } from '@/contexts/general.context';
+import { useValidationContext } from '@/contexts/validation.context';
 import {
   Box,
   Button,
@@ -10,16 +20,6 @@ import {
 } from '@primer/react';
 import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
-import ValidationFlash, {
-  ValidationField,
-} from '../../components/Flash/ValidationFlash';
-import LoginFooter from '../../components/Footer/LoginFooter';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
-import PasswordRequirementsText from '../../components/PasswordRequirementsText/PasswordRequirementsText';
-import { useAuthContext } from '../../contexts/auth.context';
-import { useGeneralContext } from '../../contexts/general.context';
-import { useValidationContext } from '../../contexts/validation.context';
 import './main.css';
 
 const SignUp = () => {

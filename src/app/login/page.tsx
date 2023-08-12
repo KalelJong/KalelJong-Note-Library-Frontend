@@ -1,3 +1,10 @@
+import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
+import LoginFooter from '@/components/Footer/LoginFooter';
+import LoadingSpinner from '@/components/LoadingSpinner';
+import LoginNavbar from '@/components/Navbar/LoginNavbar';
+import { useAuthContext } from '@/contexts/auth.context';
+import { useGeneralContext } from '@/contexts/general.context';
+import { useValidationContext } from '@/contexts/validation.context';
 import { XIcon } from '@primer/octicons-react';
 import {
   Box,
@@ -13,13 +20,6 @@ import {
 } from '@primer/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
-import LoginFooter from '../../components/Footer/LoginFooter';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
-import { useAuthContext } from '../../contexts/auth.context';
-import { useGeneralContext } from '../../contexts/general.context';
-import { useValidationContext } from '../../contexts/validation.context';
 import './main.css';
 
 const Login: React.FC = () => {

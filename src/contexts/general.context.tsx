@@ -1,3 +1,4 @@
+"use client";
 import React, { createContext, useContext, useState } from 'react';
 import { Note } from '../types/note.interface';
 import { NoteCollection } from '../types/noteCollection.interface';

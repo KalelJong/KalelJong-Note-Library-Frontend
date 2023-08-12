@@ -1,5 +1,4 @@
-import React from "react";
-import BlankStateSystemError from '../components/BlankState/BlankStateSystemError';
+import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import { Note } from '../types/note.interface';
 import { NoteCollection } from '../types/noteCollection.interface';
 import { User } from '../types/user.interface';

@@ -1,7 +1,9 @@
+import { AuthProvider } from "@/contexts/auth.context";
+import { GeneralProvider } from "@/contexts/general.context";
+import { ValidationProvider } from "@/contexts/validation.context";
 import "@primer/css/index.scss";
 import "@primer/react-brand/lib/css/main.css";
 import { Metadata } from "next";
-import React from "react";
 import PrimerProvider from "../providers/PrimerProvider";
 import "./globals.css";
 
@@ -13,11 +15,19 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <PrimerProvider>{children}</PrimerProvider>
+      <body>
+      <AuthProvider>
+            <ValidationProvider>
+              <GeneralProvider>
+              <PrimerProvider>{children}</PrimerProvider>
+            </GeneralProvider>
+          </ValidationProvider>
+        </AuthProvider>
+      </body>
     </html>
-  )
+  );
 }

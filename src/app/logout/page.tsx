@@ -1,3 +1,8 @@
+import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
+import LoginFooter from '@/components/Footer/LoginFooter';
+import LoginNavbar from '@/components/Navbar/LoginNavbar';
+import { useAuthContext } from '@/contexts/auth.context';
+import { logout } from '@/services/auth.service';
 import {
   Box,
   Button,
@@ -7,11 +12,6 @@ import {
 } from '@primer/react';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
-import LoginFooter from '../../components/Footer/LoginFooter';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
-import { useAuthContext } from '../../contexts/auth.context';
-import { logout } from '../../services/auth.service';
 import './main.css';
 
 const Logout = () => {
