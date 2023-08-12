@@ -1,11 +1,9 @@
 import "@primer/css/index.scss";
 import "@primer/react-brand/lib/css/main.css";
-import "./globals.css";
-
-
 import { Metadata } from "next";
 import React from "react";
 import PrimerProvider from "../providers/PrimerProvider";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: 'Note Library',

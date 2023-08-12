@@ -1,10 +1,10 @@
-import { Box, Button, ButtonGroup, Text } from '@primer/react';
 import { PencilIcon, TrashIcon } from '@primer/octicons-react';
+import { Box, Button, ButtonGroup, Text } from '@primer/react';
 import { Hidden } from '@primer/react/drafts';
-
-import NoteCollectionActionMenu from './NoteCollectionActionMenu';
+import React from "react";
 import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
 import { Note } from '../../types/note.interface';
+import NoteCollectionActionMenu from './NoteCollectionActionMenu';
 
 const NoteCollectionItem = ({ noteCollection }: any) => {
   const {

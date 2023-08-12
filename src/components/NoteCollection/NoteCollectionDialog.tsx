@@ -1,10 +1,9 @@
-import { FormControl, TextInput, Text, Box } from '@primer/react';
+import { Box, FormControl, Text, TextInput } from '@primer/react';
 import { Dialog, DialogButtonProps } from '@primer/react/drafts';
+import React, { useState } from "react";
+import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
 import { Note } from '../../types/note.interface';
 import NotesFormControl from '../Note/NoteFormControl';
-
-import { useState } from 'react';
-import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
 
 function NoteCollectionDialog() {
   const {

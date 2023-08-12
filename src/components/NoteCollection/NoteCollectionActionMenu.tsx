@@ -4,6 +4,7 @@ import {
   TrashIcon,
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, IconButton } from '@primer/react';
+import React from "react";
 import { useNoteCollectionContext } from '../../contexts/noteCollection.context';
 
 function NoteCollectionActionMenu({ noteCollection }: any) {

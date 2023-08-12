@@ -1,4 +1,5 @@
-import { Box, Link, PageLayout } from '@primer/react';
+import { Box, Link } from '@primer/react';
+import React from "react";
 
 const LoginFooter = () => {
   return (

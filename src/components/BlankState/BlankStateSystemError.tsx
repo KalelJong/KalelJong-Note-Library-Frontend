@@ -10,7 +10,7 @@ import {
   TreeView,
   useDetails,
 } from '@primer/react';
-import { useState } from 'react';
+import React, { useState } from "react";
 
 interface BlankStateSystemErrorProps {
   httpError?: any;

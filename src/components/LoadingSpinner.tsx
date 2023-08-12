@@ -1,4 +1,5 @@
 import { Box, Spinner } from '@primer/react';
+import React from "react";
 
 function LoadingSpinner() {
   return (

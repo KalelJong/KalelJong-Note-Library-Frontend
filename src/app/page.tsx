@@ -6,23 +6,20 @@ import {
 } from '@primer/octicons-react';
 import { Box, Button, ButtonGroup, PageLayout, TreeView } from '@primer/react';
 import React, { useEffect, useState } from 'react';
-
-import { useGeneralContext } from '../contexts/general.context';
-import { useNoteContext } from '../contexts/note.context';
-import { useNoteCollectionContext } from '../contexts/noteCollection.context';
-import { Note } from '../types/note.interface';
-import { NoteCollection } from '../types/noteCollection.interface';
-
 import BlankStateEmpty from '../components/BlankState/BlankStateEmpty';
+import BlankStateSystemError from '../components/BlankState/BlankStateSystemError';
 import GeneralFlash from '../components/Flash/GeneralFlash';
+import LoadingSpinner from '../components/LoadingSpinner';
 import MainNavbar from '../components/Navbar/MainNavbar';
 import NoteDialog from '../components/Note/NoteDialog';
 import NoteItem from '../components/Note/NoteItem';
 import NoteCollectionDialog from '../components/NoteCollection/NoteCollectionDialog';
 import NoteCollectionItem from '../components/NoteCollection/NoteCollectionItem';
-
-import BlankStateSystemError from '../components/BlankState/BlankStateSystemError';
-import LoadingSpinner from '../components/LoadingSpinner';
+import { useGeneralContext } from '../contexts/general.context';
+import { useNoteContext } from '../contexts/note.context';
+import { useNoteCollectionContext } from '../contexts/noteCollection.context';
+import { Note } from '../types/note.interface';
+import { NoteCollection } from '../types/noteCollection.interface';
 import './HomePage.module.css';
 
 const HomePage: React.FC = () => {

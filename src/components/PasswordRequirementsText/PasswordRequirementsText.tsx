@@ -1,4 +1,5 @@
 import { Link, Text } from '@primer/react';
+import React from "react";
 import { useAuthContext } from '../../contexts/auth.context';
 
 const PasswordRequirementsText = () => {
@@ -25,7 +26,7 @@ const PasswordRequirementsText = () => {
       }}
     >
       <Text as="p">
-        Make sure it's{' '}
+        Make sure it&apos;s{' '}
         <Text
           sx={{
             ...getValidationStyle(validations.passwordRegexTwo),

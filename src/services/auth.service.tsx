@@ -39,4 +39,4 @@ const checkToken = async (token: string): Promise<void> => {
   }
 };
 
-export { login, logout, checkToken };
+export { checkToken, login, logout };
