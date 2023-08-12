@@ -1,113 +1,225 @@
-import Image from 'next/image'
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  FileDirectoryIcon,
+  NoteIcon,
+} from '@primer/octicons-react';
+import { Box, Button, ButtonGroup, PageLayout, TreeView } from '@primer/react';
+import React, { useEffect, useState } from 'react';
 
-export default function Home() {
+import { useGeneralContext } from '../contexts/general.context';
+import { useNoteContext } from '../contexts/note.context';
+import { useNoteCollectionContext } from '../contexts/noteCollection.context';
+import { Note } from '../types/note.interface';
+import { NoteCollection } from '../types/noteCollection.interface';
+
+import BlankStateEmpty from '../components/BlankState/BlankStateEmpty';
+import GeneralFlash from '../components/Flash/GeneralFlash';
+import MainNavbar from '../components/Navbar/MainNavbar';
+import NoteDialog from '../components/Note/NoteDialog';
+import NoteItem from '../components/Note/NoteItem';
+import NoteCollectionDialog from '../components/NoteCollection/NoteCollectionDialog';
+import NoteCollectionItem from '../components/NoteCollection/NoteCollectionItem';
+
+import BlankStateSystemError from '../components/BlankState/BlankStateSystemError';
+import LoadingSpinner from '../components/LoadingSpinner';
+import './HomePage.module.css';
+
+const HomePage: React.FC = () => {
+  const { loading, setLoading } = useGeneralContext();
+  const [expanded, setExpanded] = React.useState<string[]>([]);
+  const { notesData, noteCollectionsData } = useGeneralContext();
+  const { fetchNotesData, noteDialogIsOpen, openNoteDialog } = useNoteContext();
+  const [httpError, setHttpError] = useState(null);
+
+  const {
+    fetchNoteCollectionsData,
+    noteCollectionDialogIsOpen,
+    openNoteCollectionDialog,
+  } = useNoteCollectionContext();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await fetchNotesData();
+        await fetchNoteCollectionsData();
+        setLoading(false);
+      } catch (error) {
+        <BlankStateSystemError httpError={error} />;
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const renderFilteredNoteItems = () =>
+    notesData
+      .filter((note: Note) => !note.noteCollectionId)
+      .map((note: Note) => (
+        <TreeView.Item id={note.id} key={note.id}>
+          <TreeView.LeadingVisual>
+            <NoteIcon size={16} />
+          </TreeView.LeadingVisual>
+          <NoteItem note={note} />
+        </TreeView.Item>
+      ));
+
+  const renderFilteredNoteItemTrees = (filteredNotes: Note[]) =>
+    filteredNotes.map((note) => (
+      <Box
+        key={note.id}
+        sx={{
+          paddingLeft: 3,
+          paddingRight: -3,
+        }}
+      >
+        <TreeView.Item id={note.id}>
+          <TreeView.LeadingVisual>
+            <NoteIcon size={16} />
+          </TreeView.LeadingVisual>
+          <NoteItem note={note} />
+        </TreeView.Item>
+      </Box>
+    ));
+
+  const renderNoteCollections = () =>
+    noteCollectionsData.map((noteCollection: NoteCollection) => {
+      const filteredNotes = notesData.filter(
+        (note: Note) => note.noteCollectionId === noteCollection.id
+      );
+
+      return (
+        <TreeView.Item
+          id={noteCollection.id}
+          key={noteCollection.id}
+          expanded={expanded.includes(noteCollection.id)}
+          onExpandedChange={(isExpanded: boolean) => {
+            if (isExpanded) {
+              setExpanded((prevExpanded) => [
+                ...prevExpanded,
+                noteCollection.id,
+              ]);
+            } else {
+              setExpanded((prevExpanded) =>
+                prevExpanded.filter((id) => id !== noteCollection.id)
+              );
+            }
+          }}
+        >
+          <TreeView.LeadingVisual>
+            <TreeView.DirectoryIcon />
+          </TreeView.LeadingVisual>
+          <NoteCollectionItem noteCollection={noteCollection} />
+          <TreeView.SubTree>
+            {renderFilteredNoteItemTrees(filteredNotes)}
+          </TreeView.SubTree>
+        </TreeView.Item>
+      );
+    });
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <>
+      {noteDialogIsOpen && <NoteDialog />}
+      {noteCollectionDialogIsOpen && <NoteCollectionDialog />}
+      <PageLayout containerWidth="full" padding="none">
+        <PageLayout.Header>
+          <MainNavbar />
+          <GeneralFlash />
+        </PageLayout.Header>
+        <PageLayout.Content padding="normal" width="xlarge">
+          {!notesData.length && !noteCollectionsData.length && !loading ? (
+            <BlankStateEmpty />
+          ) : (
+            <>
+              {/* <UnderlineNavItem /> */}
+              <TreeView aria-label="Files">
+                <Box sx={{ marginTop: 5 }}>
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'flex-start',
+                        flexWrap: 'wrap-reverse',
+                      }}
+                    >
+                      <ButtonGroup
+                        sx={{
+                          marginRight: '3',
+                          marginBottom: '3',
+                        }}
+                      >
+                        <Button
+                          trailingIcon={
+                            expanded.length > 0
+                              ? ChevronDownIcon
+                              : ChevronRightIcon
+                          }
+                          onClick={() =>
+                            setExpanded(
+                              expanded.length > 0
+                                ? []
+                                : noteCollectionsData.map(
+                                    (noteCollection: NoteCollection) =>
+                                      noteCollection.id
+                                  )
+                            )
+                          }
+                        >
+                          {expanded.length > 0 ? 'Collapse' : 'Expand'} All
+                        </Button>
+                      </ButtonGroup>
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'flex-start',
+                          flexWrap: 'wrap',
+                        }}
+                      >
+                        <Button
+                          leadingIcon={NoteIcon}
+                          variant="primary"
+                          onClick={() => openNoteDialog('create')}
+                          sx={{
+                            marginRight: '3',
+                            marginBottom: '3',
+                          }}
+                        >
+                          Create Note
+                        </Button>
+                        <Button
+                          leadingIcon={FileDirectoryIcon}
+                          variant="default"
+                          onClick={() => openNoteCollectionDialog('create')}
+                          sx={{
+                            marginBottom: '3',
+                          }}
+                        >
+                          Create NoteCollection
+                        </Button>
+                      </Box>
+                    </Box>
+                    {renderNoteCollections()}
+                    {renderFilteredNoteItems()}
+                  </Box>
+                </Box>
+              </TreeView>
+            </>
+          )}
+        </PageLayout.Content>
+      </PageLayout>
+    </>
+  );
+};
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+export default HomePage;

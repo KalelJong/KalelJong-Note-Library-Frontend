@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
-  Flash,
   FormControl,
   Heading,
-  IconButton,
-  Link,
-  PageLayout,
-  Text,
-  TextInput,
+  PageLayout
 } from '@primer/react';
-import { XIcon } from '@primer/octicons-react';
-import { useAuthContext } from '../../contexts/auth.context';
-import './LogoutPage.module.css';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
-import LoginFooter from '../../components/Footer/LoginFooter';
-import { logout } from '../../services/auth.service';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
+import LoginFooter from '../../components/Footer/LoginFooter';
+import LoginNavbar from '../../components/Navbar/LoginNavbar';
+import { useAuthContext } from '../../contexts/auth.context';
+import { logout } from '../../services/auth.service';
+import './LogoutPage.module.css';
 
 const LogoutPage = () => {
   const navigate = useNavigate();

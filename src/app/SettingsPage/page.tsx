@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+  AlertIcon
+} from '@primer/octicons-react';
 import {
   Avatar,
   Box,
@@ -7,32 +8,23 @@ import {
   Dialog,
   Flash,
   FormControl,
-  Header,
   Heading,
-  IconButton,
   Link,
   PageLayout,
   Pagehead,
   StyledOcticon,
   Text,
-  TextInput,
+  TextInput
 } from '@primer/react';
-import {
-  AlertIcon,
-  MarkGithubIcon,
-  StopIcon,
-  XIcon,
-} from '@primer/octicons-react';
-import { User } from '../../types/user.interface';
-import { useAuthContext } from '../../contexts/auth.context';
-import { users } from '../../services/http.service';
-import AccountActionMenu from '../../components/AccountActionMenu';
-import './SettingsPage.module.css';
-import MainNavbar from '../../components/Navbar/MainNavbar';
+import React, { useEffect, useState } from 'react';
 import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
-import { useGeneralContext } from '../../contexts/general.context';
 import GeneralFlash from '../../components/Flash/GeneralFlash';
-import ValidationFlash from '../../components/Flash/ValidationFlash';
+import MainNavbar from '../../components/Navbar/MainNavbar';
+import { useAuthContext } from '../../contexts/auth.context';
+import { useGeneralContext } from '../../contexts/general.context';
+import { users } from '../../services/http.service';
+import { User } from '../../types/user.interface';
+import './SettingsPage.module.css';
 
 const SettingsPage = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -307,7 +299,7 @@ const SettingsPage = () => {
           >
             <Text as="p">
               All of the fields on this page are optional and can be deleted at
-              any time, and by filling them out, you're giving us consent to
+              any time, and by filling them out, you&apos;re giving us consent to
               share this data wherever your user profile appears. Please see our{' '}
               <Link href="https://github.com/site/privacy">
                 privacy statement
@@ -441,7 +433,7 @@ const SettingsPage = () => {
               paddingX: '16px',
             }}
           >
-            Old password isn't valid
+            Old password isn&apos;t valid
           </Flash>
 
           {/* <ValidationFlash /> */}
@@ -522,7 +514,7 @@ const SettingsPage = () => {
               }}
             >
               <Text as="p">
-                Make sure it's{' '}
+                Make sure it&apos;s{' '}
                 {/* add red color & bold text if validation of password failed. else add green color */}
                 <Text>at least 15 characters</Text> OR{' '}
                 {/* add red color & bold text if validation of password failed. else add green color */}
@@ -611,11 +603,11 @@ const SettingsPage = () => {
                 will be available to anyone on GitHub.
               </Text>
               <Text as="p">
-                For more help, read our article "
+                For more help, read our article &quot;
                 <Link href="https://docs.github.com/articles/deleting-your-user-account">
                   Deleting your user account
                 </Link>
-                ".
+                &quot;.
               </Text>
               <hr></hr>
               <Box
