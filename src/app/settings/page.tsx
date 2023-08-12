@@ -1,3 +1,4 @@
+"use client";
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import GeneralFlash from '@/components/Flash/GeneralFlash';
 import MainNavbar from '@/components/Navbar/MainNavbar';

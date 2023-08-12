@@ -1,54 +1,10 @@
-"use client";
-import { BaseStyles, ThemeProvider, theme } from "@primer/react";
-import deepmerge from "deepmerge";
-import React from "react";
-
-const Atom = deepmerge(theme, {
-  fonts: {
-    normal:
-      "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif",
-  },
-});
-
-const AtomOneLight = deepmerge(Atom, {
-  colorSchemes: {
-    light: {
-      colors: {
-        canvas: {
-          default: "#FAFAFA",
-        },
-        fg: {
-          default: "#383A42",
-        },
-        border: {
-          default: "#DBDBDC",
-        },
-      },
-    },
-  },
-});
-
-const AtomOneDark = deepmerge(Atom, {
-  colorSchemes: {
-    dark: {
-      colors: {
-        canvas: {
-          default: "#282C34",
-        },
-        fg: {
-          default: "#ABB2BF",
-        },
-        border: {
-          default: "#181A1F",
-        },
-      },
-    },
-  },
-});
+'use client';
+import { BaseStyles, ThemeProvider } from '@primer/react';
+import React from 'react';
 
 const PrimerProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ThemeProvider theme={Atom} preventSSRMismatch>
+    <ThemeProvider preventSSRMismatch colorMode='auto'>
       <BaseStyles>{children}</BaseStyles>
     </ThemeProvider>
   );

@@ -1,3 +1,4 @@
+"use client";
 import LoginFooter from '@/components/Footer/LoginFooter';
 import LoginNavbar from '@/components/Navbar/LoginNavbar';
 import PasswordRequirementsText from '@/components/PasswordRequirementsText/PasswordRequirementsText';

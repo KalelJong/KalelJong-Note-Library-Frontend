@@ -1,3 +1,4 @@
+"use client";
 import ValidationFlash, {
   ValidationField,
 } from '@/components/Flash/ValidationFlash';

@@ -1,3 +1,4 @@
+"use client";
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import LoginFooter from '@/components/Footer/LoginFooter';
 import LoginNavbar from '@/components/Navbar/LoginNavbar';
