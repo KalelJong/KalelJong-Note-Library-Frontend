@@ -11,8 +11,8 @@ import {
   Text,
   TextInput,
 } from '@primer/react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
 import LoginFooter from '../../components/Footer/LoginFooter';
 import LoadingSpinner from '../../components/LoadingSpinner';
@@ -20,12 +20,12 @@ import LoginNavbar from '../../components/Navbar/LoginNavbar';
 import { useAuthContext } from '../../contexts/auth.context';
 import { useGeneralContext } from '../../contexts/general.context';
 import { useValidationContext } from '../../contexts/validation.context';
-import './LoginPage.module.css';
+import './main.css';
 
-const LoginPage: React.FC = () => {
+const Login: React.FC = () => {
   const { loading, setLoading } = useGeneralContext();
   const [isValid, setIsValid] = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,7 +44,7 @@ const LoginPage: React.FC = () => {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        handleCheckToken(token, navigate).finally(() => {
+        handleCheckToken(token, router).finally(() => {
           setLoading(false);
         });
       } else {
@@ -53,12 +53,12 @@ const LoginPage: React.FC = () => {
     } catch (error) {
       <BlankStateSystemError httpError={error} />;
     }
-  }, [navigate]);
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleFormSubmit(async () => {
-      const result = await handleLoginSubmit(username, password, navigate);
+      const result = await handleLoginSubmit(username, password, router);
       setIsValid(!result.error);
     });
   };
@@ -282,4 +282,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

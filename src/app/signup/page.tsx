@@ -8,8 +8,8 @@ import {
   Text,
   TextInput,
 } from '@primer/react';
+import { useRouter } from 'next/navigation';
 import React, { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ValidationFlash, {
   ValidationField,
 } from '../../components/Flash/ValidationFlash';
@@ -20,12 +20,12 @@ import PasswordRequirementsText from '../../components/PasswordRequirementsText/
 import { useAuthContext } from '../../contexts/auth.context';
 import { useGeneralContext } from '../../contexts/general.context';
 import { useValidationContext } from '../../contexts/validation.context';
-import './SignUpPage.module.css';
+import './main.css';
 
-const SignUpPage = () => {
+const SignUp = () => {
   const { loading, setLoading } = useGeneralContext();
   const setIsValid = useState(true);
-  const navigate = useNavigate();
+  const router = useRouter()
 
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -72,7 +72,7 @@ const SignUpPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleFormSubmit(async () => {
-      navigate('/login');
+      router.push('/login');
     });
   };
 
@@ -460,4 +460,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;

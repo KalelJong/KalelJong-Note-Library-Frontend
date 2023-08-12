@@ -1,3 +1,4 @@
+"use client";
 import {
   ChevronDownIcon,
   ChevronRightIcon,
@@ -20,7 +21,6 @@ import { useNoteContext } from '../contexts/note.context';
 import { useNoteCollectionContext } from '../contexts/noteCollection.context';
 import { Note } from '../types/note.interface';
 import { NoteCollection } from '../types/noteCollection.interface';
-import './HomePage.module.css';
 
 const HomePage: React.FC = () => {
   const { loading, setLoading } = useGeneralContext();

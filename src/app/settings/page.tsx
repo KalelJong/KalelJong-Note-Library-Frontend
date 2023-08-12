@@ -24,9 +24,9 @@ import { useAuthContext } from '../../contexts/auth.context';
 import { useGeneralContext } from '../../contexts/general.context';
 import { users } from '../../services/http.service';
 import { User } from '../../types/user.interface';
-import './SettingsPage.module.css';
+import './main.css';
 
-const SettingsPage = () => {
+const Settings = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [username, setUsername] = useState('');
 
@@ -750,4 +750,4 @@ const SettingsPage = () => {
   );
 };
 
-export default SettingsPage;
+export default Settings;

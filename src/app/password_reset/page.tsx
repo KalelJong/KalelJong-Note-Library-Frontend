@@ -1,5 +1,3 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -8,13 +6,16 @@ import {
   PageLayout,
   TextInput,
 } from '@primer/react';
-import { useAuthContext } from '../../contexts/auth.context';
-import LoginNavbar from '../../components/Navbar/LoginNavbar';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import LoginFooter from '../../components/Footer/LoginFooter';
+import LoginNavbar from '../../components/Navbar/LoginNavbar';
 import PasswordRequirementsText from '../../components/PasswordRequirementsText/PasswordRequirementsText';
+import { useAuthContext } from '../../contexts/auth.context';
+import './main.css';
 
-const PasswordResetPage = () => {
-  const navigate = useNavigate();
+const PasswordReset = () => {
+  const router = useRouter();
   const [username, setUsername] = useState('');
 
   const {
@@ -35,8 +36,8 @@ const PasswordResetPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await handleLoginSubmit(username, password, navigate);
-    navigate('/login');
+    const result = await handleLoginSubmit(username, password, router);
+    router.push('/login');
   };
 
   return (
@@ -248,4 +249,4 @@ const PasswordResetPage = () => {
   );
 };
 
-export default PasswordResetPage;
+export default PasswordReset;

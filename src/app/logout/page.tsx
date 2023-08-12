@@ -5,17 +5,17 @@ import {
   Heading,
   PageLayout
 } from '@primer/react';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import BlankStateSystemError from '../../components/BlankState/BlankStateSystemError';
 import LoginFooter from '../../components/Footer/LoginFooter';
 import LoginNavbar from '../../components/Navbar/LoginNavbar';
 import { useAuthContext } from '../../contexts/auth.context';
 import { logout } from '../../services/auth.service';
-import './LogoutPage.module.css';
+import './main.css';
 
-const LogoutPage = () => {
-  const navigate = useNavigate();
+const Logout = () => {
+  const router = useRouter();
 
   const {
     handleCheckToken,
@@ -32,13 +32,13 @@ const LogoutPage = () => {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        handleCheckToken(token, navigate).finally(() => {});
+        handleCheckToken(token, router).finally(() => {});
       } else {
       }
     } catch (error) {
       <BlankStateSystemError httpError={error} />;
     }
-  }, [navigate]);
+  }, [router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -125,4 +125,4 @@ const LogoutPage = () => {
   );
 };
 
-export default LogoutPage;
+export default Logout;
