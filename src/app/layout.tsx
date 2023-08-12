@@ -7,7 +7,7 @@ import '@primer/css/index.scss';
 import '@primer/react-brand/lib/css/main.css';
 import { Metadata } from 'next';
 import PrimerProvider from '../providers/PrimerProvider';
-import './globals.css';
+import './tailwind.css';
 
 export const metadata: Metadata = {
   title: 'Note Library',
