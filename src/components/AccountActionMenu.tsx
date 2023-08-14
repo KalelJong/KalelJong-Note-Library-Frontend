@@ -1,5 +1,6 @@
-import { ActionList, ActionMenu, Avatar, Box, Link, Text } from '@primer/react';
-import { useEffect, useState } from "react";
+import { SignOutIcon } from '@primer/octicons-react';
+import { ActionList, ActionMenu, Avatar, Box, Text } from '@primer/react';
+import { useEffect, useState } from 'react';
 import { logout } from '../services/auth.service';
 import { users } from '../services/http.service';
 import { User } from '../types/user.interface';
@@ -40,8 +41,8 @@ function AccountActionMenu() {
             {currentUser?.firstName} {currentUser?.lastName}
           </Text>
           <Avatar
-            src="https://github.com/octocat.png"
-            alt="@octocat"
+            src={`https://avatars.githubusercontent.com/${currentUser?.username}`}
+            alt={currentUser?.username}
             size={32}
           />
         </Box>
@@ -79,19 +80,13 @@ function AccountActionMenu() {
             </Box>
           </ActionList.Item>
           <ActionList.Divider />
-          <ActionList.Item
-            as={Link}
-            href="/settings"
-            sx={{
-              textDecoration: 'none !important',
-            }}
-          >
-            Settings
-          </ActionList.Item>
+          {/* <ActionList.LinkItem href="/settings">Settings</ActionList.LinkItem> */}
           {/* <ActionList.Divider /> */}
           <ActionList.Item variant="danger" onSelect={() => logout()}>
-            Logout
-            {/* <ActionList.TrailingVisual>⌘L</ActionList.TrailingVisual> */}
+            Sign out
+            <ActionList.TrailingVisual>
+              <SignOutIcon />
+            </ActionList.TrailingVisual>
           </ActionList.Item>
         </ActionList>
       </ActionMenu.Overlay>
