@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import LoginFooter from '@/components/Footer/LoginFooter';
 import LoadingSpinner from '@/components/LoadingSpinner';
@@ -54,7 +54,7 @@ const Login: React.FC = () => {
     } catch (error) {
       <BlankStateSystemError httpError={error} />;
     }
-  }, [router]);
+  }, [handleCheckToken, router, setLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

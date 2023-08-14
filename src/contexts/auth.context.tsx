@@ -1,11 +1,11 @@
-"use client";
+'use client';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { checkToken, login } from '../services/auth.service';
 
 interface AuthProviderProps extends React.PropsWithChildren<{}> {}
 
 interface AuthContextData {
-  handleCheckToken: (token: string, navigate: any) => Promise<void>;
+  handleCheckToken: (token: string, router: any) => Promise<void>;
   password: string;
   confirmPassword: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
@@ -22,7 +22,7 @@ interface AuthContextData {
   handleLoginSubmit: (
     username: string,
     password: string,
-    navigate: any
+    router: any
   ) => Promise<{ error: boolean }>;
 }
 
@@ -79,10 +79,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     password === confirmPassword &&
     (validations.passwordRegexOne || validations.passwordRegexTwo);
 
-  const handleCheckToken = async (token: string, navigate: any) => {
+  const handleCheckToken = async (token: string, router: any) => {
     try {
       await checkToken(token);
-      navigate('/');
+      router.push('/');
     } catch {
       localStorage.removeItem('access_token');
     }
@@ -91,11 +91,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const handleLoginSubmit = async (
     username: string,
     password: string,
-    navigate: any
+    router: any
   ) => {
     try {
       await login(username, password);
-      navigate('/');
+      router.push('/');
       return { error: false };
     } catch (error: any) {
       if (error.response && error.response.status === 401) {
