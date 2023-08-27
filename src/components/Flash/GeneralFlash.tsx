@@ -1,34 +1,48 @@
 import { useGeneralContext } from '@/contexts/general.context';
 import { AlertIcon, CheckIcon, XIcon } from '@primer/octicons-react';
-import { Box, Flash, IconButton, StyledOcticon } from '@primer/react';
+import {
+  Box,
+  Flash,
+  IconButton,
+  OcticonProps,
+  Spinner,
+  StyledOcticon,
+} from '@primer/react';
 
-const GeneralFlash = () => {
-  const { flashVisible, setFlashVisible, flashVariant, flashMessage } =
-    useGeneralContext();
+const GeneralNotification = () => {
+  const {
+    notificationVisible,
+    setNotificationVisible,
+    notificationVariant,
+    notificationMessage,
+  } = useGeneralContext();
 
-  const renderFlashContent = () => {
+  const renderNotificationContent = () => {
     const iconMap = {
       default: null,
       success: CheckIcon,
       danger: XIcon,
       warning: AlertIcon,
+      loading: <Spinner size="small" />,
     };
 
-    const Icon = iconMap[flashVariant];
+    const Icon = iconMap[notificationVariant];
 
     return (
       <Box>
-        {Icon && <StyledOcticon icon={Icon} />}
-        {flashMessage}
+        {Icon && <StyledOcticon icon={Icon as OcticonProps['icon']} />}
+        {notificationMessage}
       </Box>
     );
   };
 
   return (
     <>
-      {flashVisible ? (
+      {notificationVisible && (
         <Flash
-          variant={flashVariant}
+          variant={
+            notificationVariant as 'default' | 'success' | 'warning' | 'danger'
+          }
           full
           sx={{
             display: 'flex',
@@ -38,17 +52,17 @@ const GeneralFlash = () => {
             paddingX: '16px',
           }}
         >
-          {renderFlashContent()}
+          {renderNotificationContent()}
           <IconButton
             variant="invisible"
             aria-label="Close flash"
             icon={XIcon}
-            onClick={() => setFlashVisible(false)}
+            onClick={() => setNotificationVisible(false)}
           />
         </Flash>
-      ) : null}
+      )}
     </>
   );
 };
 
-export default GeneralFlash;
+export default GeneralNotification;

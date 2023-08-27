@@ -14,7 +14,6 @@ import {
   FormControl,
   Heading,
   IconButton,
-  Link,
   PageLayout,
   Text,
   TextInput,
@@ -235,7 +234,7 @@ const Login: React.FC = () => {
                 </Button>
               </FormControl>
 
-              <Link
+              {/* <Link
                 sx={{
                   textDecoration: 'none !important',
                   fontSize: '12px',
@@ -246,11 +245,11 @@ const Login: React.FC = () => {
                 href="/password_reset"
               >
                 Forgot password?
-              </Link>
+              </Link> */}
             </Box>
           </Box>
 
-          <Text
+          {/* <Text
             as="p"
             sx={{
               marginTop: 3,
@@ -262,7 +261,7 @@ const Login: React.FC = () => {
             }}
           >
             New to GitHub? <Link href="/signup">Create an account</Link>.
-          </Text>
+          </Text> */}
         </Box>
       </PageLayout.Content>
       <PageLayout.Footer

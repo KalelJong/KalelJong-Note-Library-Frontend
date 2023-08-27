@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import BlankStateEmpty from '@/components/BlankState/BlankStateEmpty';
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import GeneralFlash from '@/components/Flash/GeneralFlash';

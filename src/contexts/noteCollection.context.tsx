@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { noteCollections } from '../services/http.service';
@@ -70,7 +70,7 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
   const [noteCollectionDialogType, setNoteCollectionDialogType] =
     useState<NoteCollectionDialogType>(null);
 
-  const { handleFlash, noteCollectionsData, setNoteCollectionsData } =
+  const { handleNotification, noteCollectionsData, setNoteCollectionsData } =
     useGeneralContext();
   const confirm = useConfirm();
 
@@ -117,10 +117,14 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
         ...noteCollectionsData,
         createdNoteCollection.data,
       ]);
-      handleFlash('success', 'NoteCollection created successfully!', true);
+      handleNotification(
+        'success',
+        'NoteCollection created successfully!',
+        true
+      );
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleFlash, closeNoteCollectionDialog]
+    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
   );
 
   const handleUpdateNoteCollection = useCallback(
@@ -134,10 +138,14 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
           noteCollection.id === id ? updatedNoteCollection.data : noteCollection
         )
       );
-      handleFlash('success', 'NoteCollection updated successfully!', true);
+      handleNotification(
+        'success',
+        'NoteCollection updated successfully!',
+        true
+      );
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleFlash, closeNoteCollectionDialog]
+    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
   );
 
   const handleDeleteNoteCollection = useCallback(
@@ -146,10 +154,14 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
       setNoteCollectionsData(
         noteCollectionsData.filter((noteCollection) => noteCollection.id !== id)
       );
-      handleFlash('success', 'NoteCollection deleted successfully!', true);
+      handleNotification(
+        'success',
+        'NoteCollection deleted successfully!',
+        true
+      );
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleFlash, closeNoteCollectionDialog]
+    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
   );
 
   return (

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { notes } from '../services/http.service';
@@ -49,7 +49,7 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
   const [noteDialogIsOpen, setNoteDialogIsOpen] = useState(false);
   const [noteDialogType, setNoteDialogType] = useState<NoteDialogType>(null);
 
-  const { handleFlash, notesData, setNotesData } = useGeneralContext();
+  const { handleNotification, notesData, setNotesData } = useGeneralContext();
   const confirm = useConfirm();
 
   const fetchNotesData = useCallback(async (): Promise<Note[]> => {
@@ -87,10 +87,10 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
         content: content,
       });
       setNotesData([...notesData, createdNote.data]);
-      handleFlash('success', 'Note created successfully!', true);
+      handleNotification('success', 'Note created successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleFlash, closeNoteDialog]
+    [notesData, handleNotification, closeNoteDialog]
   );
 
   const handleUpdateNote = useCallback(
@@ -99,20 +99,20 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
       setNotesData(
         notesData.map((note) => (note.id === id ? updatedNote.data : note))
       );
-      handleFlash('success', 'Note updated successfully!', true);
+      handleNotification('success', 'Note updated successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleFlash, closeNoteDialog]
+    [notesData, handleNotification, closeNoteDialog]
   );
 
   const handleDeleteNote = useCallback(
     async (id: string) => {
       await notes.delete(id);
       setNotesData(notesData.filter((note) => note.id !== id));
-      handleFlash('success', 'Note deleted successfully!', true);
+      handleNotification('success', 'Note deleted successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleFlash, closeNoteDialog]
+    [notesData, handleNotification, closeNoteDialog]
   );
 
   return (
