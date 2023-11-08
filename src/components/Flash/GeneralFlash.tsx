@@ -36,6 +36,15 @@ const GeneralNotification = () => {
     );
   };
 
+  const XIconOcticon = () => (
+    <Octicon
+      icon={XIcon}
+      sx={{
+        margin: '0 !important',
+      }}
+    />
+  );
+
   return (
     <>
       {notificationVisible && (
@@ -56,7 +65,7 @@ const GeneralNotification = () => {
           <IconButton
             variant="invisible"
             aria-label="Close flash"
-            icon={XIcon}
+            icon={XIconOcticon}
             onClick={() => setNotificationVisible(false)}
           />
         </Flash>
