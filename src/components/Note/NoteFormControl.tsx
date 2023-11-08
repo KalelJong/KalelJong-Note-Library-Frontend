@@ -1,10 +1,11 @@
 import { useNoteContext } from '@/contexts/note.context';
 import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
-import { AlertIcon } from '@primer/octicons-react';
+import { AlertFillIcon } from '@primer/octicons-react';
 import {
   Autocomplete,
   FormControl,
   Octicon,
+  Text,
   TextInputWithTokens,
   Token,
 } from '@primer/react';
@@ -38,7 +39,7 @@ function NotesFormControl({
 
   const AlertIconOcticon = () => (
     <Octicon
-      icon={AlertIcon}
+      icon={AlertFillIcon}
       sx={{
         color: 'attention.fg',
         fill: 'currentColor !important',
@@ -197,15 +198,22 @@ function NotesFormControl({
       </Autocomplete>
 
       {hasPreviouslyAssignedNotes && (
-        <FormControl.Validation
-          id="warning"
-          variant="warning"
+        <Text
           sx={{
             marginTop: 2,
+            color: 'attention.fg',
+            fontWeight: 'bold',
           }}
         >
+          <Octicon
+            icon={AlertFillIcon}
+            sx={{
+              color: 'attention.fg',
+              fill: 'currentColor !important',
+            }}
+          />{' '}
           Previous assigned notes will be reassigned to this NoteCollection
-        </FormControl.Validation>
+        </Text>
       )}
     </FormControl>
   );
