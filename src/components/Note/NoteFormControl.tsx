@@ -4,11 +4,11 @@ import { AlertIcon } from '@primer/octicons-react';
 import {
   Autocomplete,
   FormControl,
-  StyledOcticon,
+  Octicon,
   TextInputWithTokens,
   Token,
 } from '@primer/react';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { InputToken } from '../../types/inputToken.interface';
 import { Note } from '../../types/note.interface';
 import BlankStateSystemError from '../BlankState/BlankStateSystemError';
@@ -37,7 +37,7 @@ function NotesFormControl({
   }, [fetchNotesData]);
 
   const AlertIconOcticon = () => (
-    <StyledOcticon
+    <Octicon
       icon={AlertIcon}
       sx={{
         color: 'attention.fg',

@@ -157,7 +157,7 @@ const HomePage: React.FC = () => {
                         }}
                       >
                         <Button
-                          trailingIcon={
+                          trailingVisual={
                             expanded.length > 0
                               ? ChevronDownIcon
                               : ChevronRightIcon
@@ -184,7 +184,7 @@ const HomePage: React.FC = () => {
                         }}
                       >
                         <Button
-                          leadingIcon={NoteIcon}
+                          leadingVisual={NoteIcon}
                           variant="primary"
                           onClick={() => openNoteDialog('create')}
                           sx={{
@@ -195,7 +195,7 @@ const HomePage: React.FC = () => {
                           Create Note
                         </Button>
                         <Button
-                          leadingIcon={FileDirectoryIcon}
+                          leadingVisual={FileDirectoryIcon}
                           variant="default"
                           onClick={() => openNoteCollectionDialog('create')}
                           sx={{

@@ -41,8 +41,7 @@ const NoteCollectionItem = ({ noteCollection }: any) => {
         <Hidden when={['narrow']}>
           <ButtonGroup>
             <Button
-              leadingIcon={PencilIcon}
-              variant="outline"
+              leadingVisual={PencilIcon}
               onClick={() => {
                 setSelectedNoteCollection(noteCollection);
                 openNoteCollectionDialog('update');
@@ -51,7 +50,7 @@ const NoteCollectionItem = ({ noteCollection }: any) => {
               Edit
             </Button>
             <Button
-              leadingIcon={TrashIcon}
+              leadingVisual={TrashIcon}
               variant="danger"
               onClick={() => {
                 setSelectedNoteCollection(noteCollection);

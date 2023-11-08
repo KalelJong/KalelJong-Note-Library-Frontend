@@ -4,9 +4,9 @@ import {
   Box,
   Flash,
   IconButton,
+  Octicon,
   OcticonProps,
   Spinner,
-  StyledOcticon,
 } from '@primer/react';
 
 const GeneralNotification = () => {
@@ -30,7 +30,7 @@ const GeneralNotification = () => {
 
     return (
       <Box>
-        {Icon && <StyledOcticon icon={Icon as OcticonProps['icon']} />}
+        {Icon && <Octicon icon={Icon as OcticonProps['icon']} />}
         {notificationMessage}
       </Box>
     );

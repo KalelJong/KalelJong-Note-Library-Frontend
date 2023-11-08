@@ -11,8 +11,7 @@ import {
   TrashIcon,
   TypographyIcon,
 } from '@primer/octicons-react';
-import { ActionList, ActionMenu, Text } from '@primer/react';
-import { UnderlineNav } from '@primer/react/drafts';
+import { ActionList, ActionMenu, Text, UnderlineNav } from '@primer/react';
 import React from 'react';
 
 function UnderlineNavItem() {

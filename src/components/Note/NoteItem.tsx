@@ -37,8 +37,7 @@ const NoteItem = ({ note }: any) => {
       <Hidden when={['narrow']}>
         <ButtonGroup>
           <Button
-            leadingIcon={PencilIcon}
-            variant="outline"
+            leadingVisual={PencilIcon}
             onClick={() => {
               setSelectedNote(note);
               openNoteDialog('update');
@@ -47,7 +46,7 @@ const NoteItem = ({ note }: any) => {
             Edit
           </Button>
           <Button
-            leadingIcon={TrashIcon}
+            leadingVisual={TrashIcon}
             variant="danger"
             onClick={() => {
               setSelectedNote(note);
