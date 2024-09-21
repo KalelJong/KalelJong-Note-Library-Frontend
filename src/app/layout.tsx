@@ -1,13 +1,11 @@
 import { AuthProvider } from '@/contexts/auth.context';
 import { GeneralProvider } from '@/contexts/general.context';
+import { NoteCollectionProvider } from '@/contexts/note-collection.context';
 import { NoteProvider } from '@/contexts/note.context';
-import { NoteCollectionProvider } from '@/contexts/noteCollection.context';
 import { ValidationProvider } from '@/contexts/validation.context';
-import '@primer/css/index.scss';
-import '@primer/react-brand/lib/css/main.css';
 import { Metadata } from 'next';
 import PrimerProvider from '../providers/PrimerProvider';
-import './tailwind.css';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Note Library',
@@ -16,9 +14,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" className="w-full h-full">
       <body className="w-full h-full">

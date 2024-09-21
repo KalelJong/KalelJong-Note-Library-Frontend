@@ -1,4 +1,4 @@
-import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
+import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { PencilIcon, TrashIcon } from '@primer/octicons-react';
 import { Box, Button, ButtonGroup, Text } from '@primer/react';
 import { Hidden } from '@primer/react/drafts';
@@ -37,7 +37,7 @@ const NoteCollectionItem = ({ noteCollection }: any) => {
           {noteCollection.notes.map((note: Note) => note.title).join(', ')}
         </Text>
       </Box>
-      <Box onClick={(e) => e.stopPropagation()}>
+      <div onClick={(e) => e.stopPropagation()}>
         <Hidden when={['narrow']}>
           <ButtonGroup>
             <Button
@@ -65,7 +65,7 @@ const NoteCollectionItem = ({ noteCollection }: any) => {
         <Hidden when={['regular', 'wide']}>
           <NoteCollectionActionMenu noteCollection={noteCollection} />
         </Hidden>
-      </Box>
+      </div>
     </Box>
   );
 };

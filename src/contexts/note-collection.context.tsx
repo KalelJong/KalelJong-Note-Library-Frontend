@@ -2,8 +2,8 @@
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import { noteCollections } from '../services/http.service';
+import { NoteCollection } from '../types/note-collection.interface';
 import { Note } from '../types/note.interface';
-import { NoteCollection } from '../types/noteCollection.interface';
 import { useGeneralContext } from './general.context';
 
 interface NoteCollectionProviderProps extends React.PropsWithChildren<{}> {}

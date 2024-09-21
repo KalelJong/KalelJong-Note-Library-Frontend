@@ -1,5 +1,5 @@
+import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { useNoteContext } from '@/contexts/note.context';
-import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
 import { Box, Button, Heading, Text } from '@primer/react';
 
 function BlankStateEmpty() {

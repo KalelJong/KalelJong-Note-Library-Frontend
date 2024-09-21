@@ -1,6 +1,6 @@
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
+import { NoteCollection } from '../types/note-collection.interface';
 import { Note } from '../types/note.interface';
-import { NoteCollection } from '../types/noteCollection.interface';
 import { User } from '../types/user.interface';
 import api from './api.service';
 

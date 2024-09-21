@@ -1,5 +1,5 @@
+import { NoteCollection } from './note-collection.interface';
 import { Note } from './note.interface';
-import { NoteCollection } from './noteCollection.interface';
 
 export interface User {
   id: string;

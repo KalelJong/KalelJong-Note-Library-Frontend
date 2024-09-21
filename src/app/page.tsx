@@ -9,10 +9,10 @@ import NoteItem from '@/components/Note/NoteItem';
 import NoteCollectionDialog from '@/components/NoteCollection/NoteCollectionDialog';
 import NoteCollectionItem from '@/components/NoteCollection/NoteCollectionItem';
 import { useGeneralContext } from '@/contexts/general.context';
+import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { useNoteContext } from '@/contexts/note.context';
-import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
+import { NoteCollection } from '@/types/note-collection.interface';
 import { Note } from '@/types/note.interface';
-import { NoteCollection } from '@/types/noteCollection.interface';
 import {
   ChevronDownIcon,
   ChevronRightIcon,

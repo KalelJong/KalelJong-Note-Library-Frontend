@@ -1,4 +1,4 @@
-import { useNoteCollectionContext } from '@/contexts/noteCollection.context';
+import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { Box, FormControl, Text, TextInput } from '@primer/react';
 import { Dialog, DialogButtonProps } from '@primer/react/drafts';
 import { useState } from "react";

@@ -1,7 +1,7 @@
 'use client';
 import React, { createContext, useContext, useState } from 'react';
+import { NoteCollection } from '../types/note-collection.interface';
 import { Note } from '../types/note.interface';
-import { NoteCollection } from '../types/noteCollection.interface';
 
 interface GeneralProviderProps extends React.PropsWithChildren<{}> {}
 interface GeneralContextData {
