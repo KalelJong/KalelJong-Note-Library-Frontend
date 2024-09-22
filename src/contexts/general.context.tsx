@@ -1,9 +1,13 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
-import { NoteCollection } from '../types/note-collection.interface';
-import { Note } from '../types/note.interface';
 
-interface GeneralProviderProps extends React.PropsWithChildren<{}> {}
+import { NoteCollection } from '@/types/note-collection.interface';
+import { Note } from '@/types/note.interface';
+import React, { createContext, useContext, useState } from 'react';
+
+interface GeneralProviderProps {
+  children: React.ReactNode;
+}
+
 interface GeneralContextData {
   notesData: Note[];
   setNotesData: React.Dispatch<React.SetStateAction<Note[]>>;
@@ -13,15 +17,15 @@ interface GeneralContextData {
   >;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  notificationVisible: boolean;
-  setNotificationVisible: React.Dispatch<React.SetStateAction<boolean>>;
-  notificationVariant: 'default' | 'success' | 'warning' | 'danger' | 'loading';
-  notificationMessage: string;
-  notificationDismissible: boolean;
-  handleNotification: (
+  flashVisible: boolean;
+  setFlashVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  flashVariant: 'default' | 'success' | 'warning' | 'danger';
+  flashMessage: string;
+  flashCloseButton: boolean;
+  handleFlash: (
     variant: 'default' | 'success' | 'warning' | 'danger',
     message: string,
-    dismissible?: boolean
+    closeButton?: boolean
   ) => void;
 }
 
@@ -44,25 +48,25 @@ export const GeneralProvider: React.FC<GeneralProviderProps> = ({
   >([]);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [notificationVisible, setNotificationVisible] = useState(false);
-  const [notificationVariant, setNotificationVariant] = useState<
+  const [flashVisible, setFlashVisible] = useState(false);
+  const [flashVariant, setFlashVariant] = useState<
     'default' | 'success' | 'warning' | 'danger'
   >('default');
-  const [notificationMessage, setNotificationMessage] = useState('');
-  const [notificationDismissible, setNotificationDismissible] = useState(false);
+  const [flashMessage, setFlashMessage] = useState('');
+  const [flashCloseButton, setFlashCloseButton] = useState(false);
 
-  const handleNotification = (
+  const handleFlash = (
     variant: 'default' | 'success' | 'warning' | 'danger',
     message: string,
-    dismissible?: boolean
+    closeButton?: boolean
   ) => {
-    setNotificationVisible(true);
-    setNotificationVariant(variant);
-    setNotificationMessage(message);
-    setNotificationDismissible(dismissible || false);
+    setFlashVisible(true);
+    setFlashVariant(variant);
+    setFlashMessage(message);
+    setFlashCloseButton(closeButton || false);
 
     setTimeout(() => {
-      setNotificationVisible(false);
+      setFlashVisible(false);
     }, 10000);
   };
 
@@ -75,12 +79,12 @@ export const GeneralProvider: React.FC<GeneralProviderProps> = ({
         setNoteCollectionsData,
         loading,
         setLoading,
-        notificationVisible,
-        setNotificationVisible,
-        notificationVariant,
-        notificationMessage,
-        notificationDismissible,
-        handleNotification,
+        flashVisible,
+        setFlashVisible,
+        flashVariant,
+        flashMessage,
+        flashCloseButton,
+        handleFlash,
       }}
     >
       {children}

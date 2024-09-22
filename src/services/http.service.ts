@@ -1,20 +1,18 @@
-import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
-import { NoteCollection } from '../types/note-collection.interface';
-import { Note } from '../types/note.interface';
-import { User } from '../types/user.interface';
+import { NoteCollection } from '@/types/note-collection.interface';
+import { Note } from '@/types/note.interface';
+import { User } from '@/types/user.interface';
 import api from './api.service';
 
 export const checkConnection = async () => {
   try {
     await api.get('/');
     return true;
-  } catch (error) {
-    <BlankStateSystemError httpError={error} />;
+  } catch {
     return false;
   }
 };
 
-const users = {
+export const users = {
   getAll: () => api.get<User[]>('/users'),
   getCurrent: () => api.get<User>('/users/me'),
   get: (id: string) => api.get<User>(`/users/${id}`),
@@ -24,7 +22,7 @@ const users = {
   delete: (id: string) => api.delete(`/users/${id}`),
 };
 
-const notes = {
+export const notes = {
   getAll: () => api.get<Note[]>('/notes'),
   get: (id: string) => api.get<Note>(`/notes/${id}`),
   create: (note: Partial<Note>) => api.post<Note>('/notes', note),
@@ -33,7 +31,7 @@ const notes = {
   delete: (id: string) => api.delete(`/notes/${id}`),
 };
 
-const noteCollections = {
+export const noteCollections = {
   getAll: () => api.get<NoteCollection[]>('/note-collections'),
   get: (id: string) => api.get<NoteCollection>(`/note-collections/${id}`),
   create: (noteCollection: Partial<NoteCollection>) =>
@@ -42,5 +40,3 @@ const noteCollections = {
     api.put<NoteCollection>(`/note-collections/${id}`, noteCollection),
   delete: (id: string) => api.delete(`/note-collections/${id}`),
 };
-
-export { noteCollections, notes, users };

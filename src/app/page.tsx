@@ -1,4 +1,5 @@
 'use client';
+
 import BlankStateEmpty from '@/components/BlankState/BlankStateEmpty';
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import GeneralFlash from '@/components/Flash/GeneralFlash';
@@ -24,16 +25,15 @@ import React, { useEffect, useState } from 'react';
 
 const HomePage: React.FC = () => {
   const { loading, setLoading } = useGeneralContext();
-  const [expanded, setExpanded] = React.useState<string[]>([]);
-  const { notesData, noteCollectionsData } = useGeneralContext();
+  const [expanded, setExpanded] = useState<string[]>([]);
+  const { notesData } = useGeneralContext();
   const { fetchNotesData, noteDialogIsOpen, openNoteDialog } = useNoteContext();
-  const [httpError, setHttpError] = useState(null);
-
   const {
     fetchNoteCollectionsData,
     noteCollectionDialogIsOpen,
     openNoteCollectionDialog,
   } = useNoteCollectionContext();
+  const { noteCollectionsData } = useGeneralContext();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,7 @@ const HomePage: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [fetchNotesData, fetchNoteCollectionsData, setLoading]);
 
   const renderFilteredNoteItems = () =>
     notesData
@@ -130,85 +130,81 @@ const HomePage: React.FC = () => {
         <PageLayout.Content padding="normal" width="xlarge">
           {!notesData.length && !noteCollectionsData.length && !loading ? (
             <BlankStateEmpty />
-          ) : (
-            <>
-              {/* <UnderlineNavItem /> */}
-              <TreeView aria-label="Files">
-                <Box sx={{ marginTop: 5 }}>
-                  <Box
+      ) : (
+        <TreeView aria-label="Files">
+          <Box sx={{ marginTop: 5 }}>
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+              }}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'flex-start',
+                  flexWrap: 'wrap-reverse',
+                }}
+              >
+                <ButtonGroup
+                  sx={{
+                    marginRight: '3',
+                    marginBottom: '3',
+                  }}
+                >
+                  <Button
+                    trailingVisual={
+                      expanded.length > 0 ? ChevronDownIcon : ChevronRightIcon
+                    }
+                    onClick={() =>
+                      setExpanded(
+                        expanded.length > 0
+                          ? []
+                          : noteCollectionsData.map(
+                              (noteCollection: NoteCollection) =>
+                                noteCollection.id
+                            )
+                      )
+                    }
+                  >
+                    {expanded.length > 0 ? 'Collapse' : 'Expand'} All
+                  </Button>
+                </ButtonGroup>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  <Button
+                    leadingVisual={NoteIcon}
+                    variant="primary"
+                    onClick={() => openNoteDialog('create')}
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      justifyContent: 'center',
+                      marginRight: '3',
+                      marginBottom: '3',
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        flexWrap: 'wrap-reverse',
-                      }}
-                    >
-                      <ButtonGroup
-                        sx={{
-                          marginRight: '3',
-                          marginBottom: '3',
-                        }}
-                      >
-                        <Button
-                          trailingVisual={
-                            expanded.length > 0
-                              ? ChevronDownIcon
-                              : ChevronRightIcon
-                          }
-                          onClick={() =>
-                            setExpanded(
-                              expanded.length > 0
-                                ? []
-                                : noteCollectionsData.map(
-                                    (noteCollection: NoteCollection) =>
-                                      noteCollection.id
-                                  )
-                            )
-                          }
-                        >
-                          {expanded.length > 0 ? 'Collapse' : 'Expand'} All
-                        </Button>
-                      </ButtonGroup>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          flexWrap: 'wrap',
-                        }}
-                      >
-                        <Button
-                          leadingVisual={NoteIcon}
-                          variant="primary"
-                          onClick={() => openNoteDialog('create')}
-                          sx={{
-                            marginRight: '3',
-                            marginBottom: '3',
-                          }}
-                        >
-                          Create Note
-                        </Button>
-                        <Button
-                          leadingVisual={FileDirectoryIcon}
-                          variant="default"
-                          onClick={() => openNoteCollectionDialog('create')}
-                          sx={{
-                            marginBottom: '3',
-                          }}
-                        >
-                          Create NoteCollection
-                        </Button>
-                      </Box>
-                    </Box>
-                    {renderNoteCollections()}
-                    {renderFilteredNoteItems()}
-                  </Box>
+                    Create Note
+                  </Button>
+                  <Button
+                    leadingVisual={FileDirectoryIcon}
+                    variant="default"
+                    onClick={() => openNoteCollectionDialog('create')}
+                    sx={{
+                      marginBottom: '3',
+                    }}
+                  >
+                    Create NoteCollection
+                  </Button>
+                </Box>
+              </Box>
+              {renderNoteCollections()}
+              {renderFilteredNoteItems()}
+            </Box>
                 </Box>
               </TreeView>
             </>

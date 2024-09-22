@@ -1,11 +1,14 @@
 'use client';
+
+import { notes } from '@/services/http.service';
+import { Note } from '@/types/note.interface';
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { notes } from '../services/http.service';
-import { Note } from '../types/note.interface';
 import { useGeneralContext } from './general.context';
 
-interface NoteProviderProps extends React.PropsWithChildren<{}> {}
+interface NoteProviderProps {
+  children: React.ReactNode;
+}
 
 type NoteDialogType = 'create' | 'update' | 'delete' | null;
 
@@ -49,15 +52,14 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
   const [noteDialogIsOpen, setNoteDialogIsOpen] = useState(false);
   const [noteDialogType, setNoteDialogType] = useState<NoteDialogType>(null);
 
-  const { handleNotification, notesData, setNotesData } = useGeneralContext();
+  const { handleFlash, notesData, setNotesData } = useGeneralContext();
   const confirm = useConfirm();
 
   const fetchNotesData = useCallback(async (): Promise<Note[]> => {
     const allNotesResponse = await notes.getAll();
     setNotesData(allNotesResponse.data);
-
     return allNotesResponse.data;
-  }, [notes, setNotesData]);
+  }, [setNotesData]);
 
   const openNoteDialog = useCallback((type: NoteDialogType) => {
     setNoteDialogType(type);
@@ -87,10 +89,10 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
         content: content,
       });
       setNotesData([...notesData, createdNote.data]);
-      handleNotification('success', 'Note created successfully!', true);
+      handleFlash('success', 'Note created successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleNotification, closeNoteDialog]
+    [notesData, handleFlash, closeNoteDialog, setNotesData]
   );
 
   const handleUpdateNote = useCallback(
@@ -99,20 +101,20 @@ export const NoteProvider: React.FC<NoteProviderProps> = ({ children }) => {
       setNotesData(
         notesData.map((note) => (note.id === id ? updatedNote.data : note))
       );
-      handleNotification('success', 'Note updated successfully!', true);
+      handleFlash('success', 'Note updated successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleNotification, closeNoteDialog]
+    [notesData, handleFlash, closeNoteDialog, setNotesData]
   );
 
   const handleDeleteNote = useCallback(
     async (id: string) => {
       await notes.delete(id);
       setNotesData(notesData.filter((note) => note.id !== id));
-      handleNotification('success', 'Note deleted successfully!', true);
+      handleFlash('success', 'Note deleted successfully!', true);
       closeNoteDialog();
     },
-    [notesData, handleNotification, closeNoteDialog]
+    [notesData, handleFlash, closeNoteDialog, setNotesData]
   );
 
   return (

@@ -1,11 +1,14 @@
 'use client';
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { checkToken, login } from '../services/auth.service';
 
-interface AuthProviderProps extends React.PropsWithChildren<{}> {}
+import { checkToken, login } from '@/services/auth.service';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
+interface AuthProviderProps {
+  children: React.ReactNode;
+}
 
 interface AuthContextData {
-  handleCheckToken: (token: string, router: any) => Promise<void>;
+  handleCheckToken: (token: string) => Promise<boolean>;
   password: string;
   confirmPassword: string;
   setPassword: React.Dispatch<React.SetStateAction<string>>;
@@ -21,8 +24,7 @@ interface AuthContextData {
   };
   handleLoginSubmit: (
     username: string,
-    password: string,
-    router: any
+    password: string
   ) => Promise<{ error: boolean }>;
 }
 
@@ -79,23 +81,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     password === confirmPassword &&
     (validations.passwordRegexOne || validations.passwordRegexTwo);
 
-  const handleCheckToken = async (token: string, router: any) => {
+  const handleCheckToken = async (token: string): Promise<boolean> => {
     try {
       await checkToken(token);
-      router.push('/');
+      return true;
     } catch {
-      localStorage.removeItem('access_token');
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('access_token');
+      }
+      return false;
     }
   };
 
   const handleLoginSubmit = async (
     username: string,
-    password: string,
-    router: any
-  ) => {
+    password: string
+  ): Promise<{ error: boolean }> => {
     try {
       await login(username, password);
-      router.push('/');
       return { error: false };
     } catch (error: any) {
       if (error.response && error.response.status === 401) {

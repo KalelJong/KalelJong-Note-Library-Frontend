@@ -1,12 +1,15 @@
 'use client';
+
+import { noteCollections } from '@/services/http.service';
+import { NoteCollection } from '@/types/note-collection.interface';
+import { Note } from '@/types/note.interface';
 import { useConfirm } from '@primer/react';
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { noteCollections } from '../services/http.service';
-import { NoteCollection } from '../types/note-collection.interface';
-import { Note } from '../types/note.interface';
 import { useGeneralContext } from './general.context';
 
-interface NoteCollectionProviderProps extends React.PropsWithChildren<{}> {}
+interface NoteCollectionProviderProps {
+  children: React.ReactNode;
+}
 
 type NoteCollectionDialogType = 'create' | 'update' | 'delete' | null;
 
@@ -38,12 +41,7 @@ interface NoteCollectionContextData {
 
 const defaultNoteCollection = {
   title: '',
-  notes: [
-    {
-      title: '',
-      content: '',
-    },
-  ],
+  notes: [],
 } as NoteCollection;
 
 const NoteCollectionContext = createContext<NoteCollectionContextData | null>(
@@ -70,16 +68,17 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
   const [noteCollectionDialogType, setNoteCollectionDialogType] =
     useState<NoteCollectionDialogType>(null);
 
-  const { handleNotification, noteCollectionsData, setNoteCollectionsData } =
+  const { handleFlash, noteCollectionsData, setNoteCollectionsData } =
     useGeneralContext();
   const confirm = useConfirm();
 
-  const fetchNoteCollectionsData = async (): Promise<NoteCollection[]> => {
+  const fetchNoteCollectionsData = useCallback(async (): Promise<
+    NoteCollection[]
+  > => {
     const allNoteCollectionsResponse = await noteCollections.getAll();
     setNoteCollectionsData(allNoteCollectionsResponse.data);
-
     return allNoteCollectionsResponse.data;
-  };
+  }, [setNoteCollectionsData]);
 
   const openNoteCollectionDialog = useCallback(
     (type: NoteCollectionDialogType) => {
@@ -117,14 +116,15 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
         ...noteCollectionsData,
         createdNoteCollection.data,
       ]);
-      handleNotification(
-        'success',
-        'NoteCollection created successfully!',
-        true
-      );
+      handleFlash('success', 'NoteCollection created successfully!', true);
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
+    [
+      noteCollectionsData,
+      handleFlash,
+      closeNoteCollectionDialog,
+      setNoteCollectionsData,
+    ]
   );
 
   const handleUpdateNoteCollection = useCallback(
@@ -138,14 +138,15 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
           noteCollection.id === id ? updatedNoteCollection.data : noteCollection
         )
       );
-      handleNotification(
-        'success',
-        'NoteCollection updated successfully!',
-        true
-      );
+      handleFlash('success', 'NoteCollection updated successfully!', true);
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
+    [
+      noteCollectionsData,
+      handleFlash,
+      closeNoteCollectionDialog,
+      setNoteCollectionsData,
+    ]
   );
 
   const handleDeleteNoteCollection = useCallback(
@@ -154,14 +155,15 @@ export const NoteCollectionProvider: React.FC<NoteCollectionProviderProps> = ({
       setNoteCollectionsData(
         noteCollectionsData.filter((noteCollection) => noteCollection.id !== id)
       );
-      handleNotification(
-        'success',
-        'NoteCollection deleted successfully!',
-        true
-      );
+      handleFlash('success', 'NoteCollection deleted successfully!', true);
       closeNoteCollectionDialog();
     },
-    [noteCollectionsData, handleNotification, closeNoteCollectionDialog]
+    [
+      noteCollectionsData,
+      handleFlash,
+      closeNoteCollectionDialog,
+      setNoteCollectionsData,
+    ]
   );
 
   return (
