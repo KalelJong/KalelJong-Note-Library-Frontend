@@ -100,8 +100,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     try {
       await login(username, password);
       return { error: false };
-    } catch (error: any) {
-      if (error.response && error.response.status === 401) {
+    } catch (error) {
+      if (
+        (error as Error).response &&
+        (error as Error).response.status === 401
+      ) {
         return { error: true };
       } else {
         return { error: false };

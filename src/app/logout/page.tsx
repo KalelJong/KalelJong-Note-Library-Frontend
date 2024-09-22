@@ -1,45 +1,27 @@
-"use client";
+'use client';
 import BlankStateSystemError from '@/components/BlankState/BlankStateSystemError';
 import LoginFooter from '@/components/Footer/LoginFooter';
 import LoginNavbar from '@/components/Navbar/LoginNavbar';
 import { useAuthContext } from '@/contexts/auth.context';
 import { logout } from '@/services/auth.service';
-import {
-  Box,
-  Button,
-  FormControl,
-  Heading,
-  PageLayout
-} from '@primer/react';
-import { useRouter } from 'next/navigation';
+import { Box, Button, FormControl, Heading, PageLayout } from '@primer/react';
 import React, { useEffect } from 'react';
 import './main.css';
 
 const Logout = () => {
-  const router = useRouter();
-
-  const {
-    handleCheckToken,
-    password,
-    confirmPassword,
-    setPassword,
-    setConfirmPassword,
-    isValid,
-    validations,
-    handleLoginSubmit,
-  } = useAuthContext();
+  const { handleCheckToken } = useAuthContext();
 
   useEffect(() => {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        handleCheckToken(token, router).finally(() => {});
+        handleCheckToken(token).finally(() => {});
       } else {
       }
     } catch (error) {
-      <BlankStateSystemError httpError={error} />;
+      <BlankStateSystemError httpError={error as Record<string, unknown>} />;
     }
-  }, [router]);
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,7 +64,7 @@ const Logout = () => {
             borderRadius: 6,
           }}
         >
-          <Box as={'form'} onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
             <FormControl>
               <Heading
                 as="h1"
@@ -105,7 +87,7 @@ const Logout = () => {
                 Sign out
               </Button>
             </FormControl>
-          </Box>
+          </form>
         </Box>
       </PageLayout.Content>
       <PageLayout.Footer

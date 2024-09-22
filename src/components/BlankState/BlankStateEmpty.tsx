@@ -1,6 +1,6 @@
 import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { useNoteContext } from '@/contexts/note.context';
-import { Box, Button, Heading, Text } from '@primer/react';
+import { Box, Button, Heading } from '@primer/react';
 
 function BlankStateEmpty() {
   const { openNoteDialog } = useNoteContext();
@@ -29,11 +29,11 @@ function BlankStateEmpty() {
         <Heading as="h3" className="blankslate-heading">
           It looks like your library is empty.
         </Heading>
-        <Text as="p">
+        <p>
           Notes and NoteCollections are a great way to organize your thoughts,
           ideas, and important information. Start creating and managing your
           library today!
-        </Text>
+        </p>
         <Box
           sx={{
             display: 'flex',
@@ -42,7 +42,7 @@ function BlankStateEmpty() {
             flexWrap: 'wrap',
           }}
         >
-          <Box className="blankslate-action">
+          <div className="blankslate-action">
             <Button
               variant="primary"
               onClick={() => openNoteDialog('create')}
@@ -52,7 +52,7 @@ function BlankStateEmpty() {
             >
               Create a new note
             </Button>
-          </Box>
+          </div>
           <Box
             className="blankslate-action"
             onClick={() => openNoteCollectionDialog('create')}

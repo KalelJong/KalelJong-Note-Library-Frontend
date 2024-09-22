@@ -6,14 +6,14 @@ import {
   IconButton,
   Link,
   Text,
-  Tooltip,
   TreeView,
   useDetails,
 } from '@primer/react';
-import { useState } from "react";
+import { Tooltip } from '@primer/react/next';
+import { useState } from 'react';
 
 interface BlankStateSystemErrorProps {
-  httpError?: any;
+  httpError?: Record<string, unknown>;
 }
 
 function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
@@ -42,7 +42,11 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
     }));
   };
 
-  const renderErrorTree = (key: string, value: any, idPrefix: string = '') => {
+  const renderErrorTree = (
+    key: string,
+    value: unknown,
+    idPrefix: string = ''
+  ) => {
     const itemId = `error-${idPrefix}`;
 
     const renderItem = () => (
@@ -60,7 +64,7 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
             flexWrap: 'wrap',
           }}
         >
-          <Text as="pre">{key}: </Text>
+          <pre>{key}: </pre>
           <Text
             as="pre"
             sx={{
@@ -73,7 +77,7 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
           </Text>
         </Box>
         <Tooltip
-          aria-label={copied === idPrefix ? 'Copied!' : 'Copy'}
+          text={copied === idPrefix ? 'Copied!' : 'Copy'}
           direction="w"
           sx={{
             margin: '3px',
@@ -119,7 +123,7 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
             handleExpansionChange(itemId, expanded)
           }
         >
-          <Text as="pre">{key}: </Text>
+          <pre>{key}: </pre>
           <TreeView.SubTree>
             {Object.entries(value).map(([subKey, subValue], index) => {
               const newIdPrefix = idPrefix
@@ -166,17 +170,17 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
         <Heading as="h3" className="blankslate-heading">
           There was an error.
         </Heading>
-        <Text as="p">
+        <p>
           It seems like there was an error. Please check your internet
           connection and try again.
-        </Text>
-        <Box className="blankslate-action">
+        </p>
+        <div className="blankslate-action">
           <Button variant="primary" onClick={() => window.location.reload()}>
             Retry connection
           </Button>
-        </Box>
+        </div>
         {httpError && (
-          <Box className="blankslate-action">
+          <div className="blankslate-action">
             <Link
               onClick={() => setOpen(!open)}
               sx={{
@@ -206,7 +210,7 @@ function BlankStateSystemError({ httpError }: BlankStateSystemErrorProps) {
                 </Box>
               </TreeView.ErrorDialog>
             )}
-          </Box>
+          </div>
         )}
       </Box>
     </Box>

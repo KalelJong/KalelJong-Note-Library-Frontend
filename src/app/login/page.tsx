@@ -15,17 +15,14 @@ import {
   Heading,
   IconButton,
   PageLayout,
-  Text,
   TextInput,
 } from '@primer/react';
-import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import './main.css';
 
 const Login: React.FC = () => {
   const { loading, setLoading } = useGeneralContext();
   const [isValid, setIsValid] = useState(true);
-  const router = useRouter();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -44,21 +41,21 @@ const Login: React.FC = () => {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        handleCheckToken(token, router).finally(() => {
+        handleCheckToken(token).finally(() => {
           setLoading(false);
         });
       } else {
         setLoading(false);
       }
     } catch (error) {
-      <BlankStateSystemError httpError={error} />;
+      <BlankStateSystemError httpError={error as Record<string, unknown>} />;
     }
-  }, [handleCheckToken, router, setLoading]);
+  }, [handleCheckToken, setLoading]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await handleFormSubmit(async () => {
-      const result = await handleLoginSubmit(username, password, router);
+      const result = await handleLoginSubmit(username, password);
       setIsValid(!result.error);
     });
   };
@@ -230,7 +227,7 @@ const Login: React.FC = () => {
                   block
                 >
                   {loading ? 'Signing in' : 'Sign in'}
-                  {loading && <Text className="AnimatedEllipsis"></Text>}
+                  {loading && <span className="AnimatedEllipsis"></span>}
                 </Button>
               </FormControl>
 

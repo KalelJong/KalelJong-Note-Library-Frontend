@@ -17,7 +17,7 @@ function AccountActionMenu() {
       };
       fetchCurrentUser();
     } catch (error) {
-      <BlankStateSystemError httpError={error} />;
+      <BlankStateSystemError httpError={error as Record<string, unknown>} />;
     }
   }, []);
 

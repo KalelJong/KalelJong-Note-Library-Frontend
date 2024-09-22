@@ -1,10 +1,11 @@
 import { useNoteContext } from '@/contexts/note.context';
+import { Note } from '@/types/note.interface';
 import { PencilIcon, TrashIcon } from '@primer/octicons-react';
 import { Box, Button, ButtonGroup, Text } from '@primer/react';
 import { Hidden } from '@primer/react/drafts';
 import NoteActionMenu from './NoteActionMenu';
 
-const NoteItem = ({ note }: any) => {
+const NoteItem = ({ note }: { note: Note }) => {
   const { openNoteDialog, setSelectedNote, confirmDeleteNote } =
     useNoteContext();
 

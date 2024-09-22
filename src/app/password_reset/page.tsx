@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import LoginFooter from '@/components/Footer/LoginFooter';
 import LoginNavbar from '@/components/Navbar/LoginNavbar';
 import PasswordRequirementsText from '@/components/PasswordRequirementsText/PasswordRequirementsText';
@@ -18,14 +18,7 @@ import './main.css';
 const PasswordReset = () => {
   const router = useRouter();
   const [username, setUsername] = useState('');
-
-  const {
-    password,
-    setPassword,
-    setConfirmPassword,
-    isValid,
-    handleLoginSubmit,
-  } = useAuthContext();
+  const { setPassword, setConfirmPassword, isValid } = useAuthContext();
 
   const getValidationStyle = (validation: boolean) => ({
     color: validation ? 'success.fg' : 'danger.fg',
@@ -37,7 +30,6 @@ const PasswordReset = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const result = await handleLoginSubmit(username, password, router);
     router.push('/login');
   };
 

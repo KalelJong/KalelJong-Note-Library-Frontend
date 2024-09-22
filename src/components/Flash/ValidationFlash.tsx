@@ -48,7 +48,7 @@ const ValidationFlash: React.FC<ValidationFlashProps> = ({ fields }) => {
           >
             The following inputs have errors:
           </Text>
-          <Box>
+          <div>
             {fields.map((field, index) => (
               <React.Fragment key={field.key}>
                 <Link
@@ -64,7 +64,7 @@ const ValidationFlash: React.FC<ValidationFlashProps> = ({ fields }) => {
                 {index < fields.length - 1 && ', '}
               </React.Fragment>
             ))}
-          </Box>
+          </div>
         </Box>
       </Box>
     </Flash>

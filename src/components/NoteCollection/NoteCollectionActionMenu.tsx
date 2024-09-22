@@ -1,4 +1,5 @@
 import { useNoteCollectionContext } from '@/contexts/note-collection.context';
+import { NoteCollection } from '@/types/note-collection.interface';
 import {
   KebabHorizontalIcon,
   PencilIcon,
@@ -6,7 +7,11 @@ import {
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, IconButton } from '@primer/react';
 
-function NoteCollectionActionMenu({ noteCollection }: any) {
+function NoteCollectionActionMenu({
+  noteCollection,
+}: {
+  noteCollection: NoteCollection;
+}) {
   const {
     openNoteCollectionDialog,
     setSelectedNoteCollection,

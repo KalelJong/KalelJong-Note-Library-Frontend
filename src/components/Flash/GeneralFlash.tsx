@@ -1,7 +1,6 @@
 import { useGeneralContext } from '@/contexts/general.context';
 import { AlertIcon, CheckIcon, XIcon } from '@primer/octicons-react';
 import {
-  Box,
   Flash,
   IconButton,
   Octicon,
@@ -10,12 +9,8 @@ import {
 } from '@primer/react';
 
 const GeneralNotification = () => {
-  const {
-    notificationVisible,
-    setNotificationVisible,
-    notificationVariant,
-    notificationMessage,
-  } = useGeneralContext();
+  const { flashVisible, setFlashVisible, flashVariant, flashMessage } =
+    useGeneralContext();
 
   const renderNotificationContent = () => {
     const iconMap = {
@@ -26,13 +21,13 @@ const GeneralNotification = () => {
       loading: <Spinner size="small" />,
     };
 
-    const Icon = iconMap[notificationVariant];
+    const Icon = iconMap[flashVariant];
 
     return (
-      <Box>
+      <div>
         {Icon && <Octicon icon={Icon as OcticonProps['icon']} />}
-        {notificationMessage}
-      </Box>
+        {flashMessage}
+      </div>
     );
   };
 
@@ -47,11 +42,9 @@ const GeneralNotification = () => {
 
   return (
     <>
-      {notificationVisible && (
+      {flashVisible && (
         <Flash
-          variant={
-            notificationVariant as 'default' | 'success' | 'warning' | 'danger'
-          }
+          variant={flashVariant as 'default' | 'success' | 'warning' | 'danger'}
           full
           sx={{
             display: 'flex',
@@ -66,7 +59,7 @@ const GeneralNotification = () => {
             variant="invisible"
             aria-label="Close flash"
             icon={XIconOcticon}
-            onClick={() => setNotificationVisible(false)}
+            onClick={() => setFlashVisible(false)}
           />
         </Flash>
       )}

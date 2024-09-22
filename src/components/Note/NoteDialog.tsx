@@ -1,7 +1,7 @@
 import { useNoteContext } from '@/contexts/note.context';
-import { Box, FormControl, TextInput, Textarea } from '@primer/react';
+import { Button, FormControl, TextInput, Textarea } from '@primer/react';
 import { Dialog, DialogButtonProps } from '@primer/react/drafts';
-import { useState } from "react";
+import { useState } from 'react';
 
 function NoteDialog() {
   const {
@@ -97,7 +97,7 @@ function NoteDialog() {
     noteDialogType === 'create' ? createdContent : updatedContent;
 
   return (
-    <Box onClick={(e) => e.stopPropagation()}>
+    <Button onClick={(e) => e.stopPropagation()}>
       <Dialog
         title={getDialogTitle()}
         subtitle={getDialogSubtitle()}
@@ -135,7 +135,7 @@ function NoteDialog() {
           />
         </FormControl>
       </Dialog>
-    </Box>
+    </Button>
   );
 }
 

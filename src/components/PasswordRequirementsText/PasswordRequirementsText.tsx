@@ -24,7 +24,7 @@ const PasswordRequirementsText = () => {
         fontSize: '12px',
       }}
     >
-      <Text as="p">
+      <p>
         Make sure it&apos;s{' '}
         <Text
           sx={{
@@ -64,7 +64,7 @@ const PasswordRequirementsText = () => {
           Learn more
         </Link>
         .
-      </Text>
+      </p>
     </Text>
   );
 };

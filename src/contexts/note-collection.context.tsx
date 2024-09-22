@@ -39,10 +39,12 @@ interface NoteCollectionContextData {
   ) => Promise<void>;
 }
 
-const defaultNoteCollection = {
+const defaultNoteCollection: NoteCollection = {
+  id: '',
+  userId: '',
   title: '',
   notes: [],
-} as NoteCollection;
+};
 
 const NoteCollectionContext = createContext<NoteCollectionContextData | null>(
   null

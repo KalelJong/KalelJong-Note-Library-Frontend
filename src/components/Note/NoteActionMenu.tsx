@@ -1,4 +1,5 @@
 import { useNoteContext } from '@/contexts/note.context';
+import { Note } from '@/types/note.interface';
 import {
   KebabHorizontalIcon,
   PencilIcon,
@@ -6,7 +7,7 @@ import {
 } from '@primer/octicons-react';
 import { ActionList, ActionMenu, IconButton } from '@primer/react';
 
-function NoteActionMenu({ note }: any) {
+function NoteActionMenu({ note }: { note: Note }) {
   const { openNoteDialog, setSelectedNote, confirmDeleteNote } =
     useNoteContext();
 

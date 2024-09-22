@@ -29,7 +29,7 @@ const LoginFooter = () => {
       >
         <Link href="/security">Security</Link>
       </Box>
-      <Box>
+      <div>
         <Link
           sx={{
             color: 'fg.muted',
@@ -41,7 +41,7 @@ const LoginFooter = () => {
         >
           Contact GitHub
         </Link>
-      </Box>
+      </div>
     </Box>
   );
 };

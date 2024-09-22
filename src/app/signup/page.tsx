@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import ValidationFlash, {
   ValidationField,
 } from '@/components/Flash/ValidationFlash';
@@ -24,9 +24,8 @@ import React, { useRef, useState } from 'react';
 import './main.css';
 
 const SignUp = () => {
-  const { loading, setLoading } = useGeneralContext();
-  const setIsValid = useState(true);
-  const router = useRouter()
+  const { loading } = useGeneralContext();
+  const router = useRouter();
 
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
@@ -423,7 +422,7 @@ const SignUp = () => {
 
               <Button type="submit" variant="primary" disabled={loading} block>
                 {loading ? 'Creating account' : 'Create account'}
-                {loading && <Text className="AnimatedEllipsis"></Text>}
+                {loading && <span className="AnimatedEllipsis"></span>}
               </Button>
             </FormControl>
           </Box>

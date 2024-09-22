@@ -18,7 +18,11 @@ function NotesFormControl({
   notesValue,
   setCreatedNotes,
   setUpdatedNotes,
-}: any) {
+}: {
+  notesValue: Note[] | string;
+  setCreatedNotes: (notes: Note[]) => void;
+  setUpdatedNotes: (notes: Note[]) => void;
+}) {
   const { fetchNotesData } = useNoteContext();
   const { noteCollectionDialogType, selectedNoteCollection } =
     useNoteCollectionContext();
@@ -57,8 +61,8 @@ function NotesFormControl({
             note?.noteCollectionId === selectedNoteCollection.id
               ? undefined
               : note?.noteCollectionId !== null
-              ? AlertIconOcticon
-              : undefined,
+                ? AlertIconOcticon
+                : undefined,
           sx: { color: 'inherit' },
         }));
 
@@ -67,23 +71,23 @@ function NotesFormControl({
 
   const selectedIds = tokens.map((token) => token.id);
   const [selectedItemIds, setSelectedItemIds] = useState(selectedIds);
-  const removeToken = (tokenId: any) => {
+  const removeToken = (tokenId: string) => {
     setTokens(tokens.filter((token) => token.id !== tokenId));
     setSelectedItemIds(selectedItemIds.filter((id) => id !== tokenId));
   };
 
-  const isSelected = (itemId: any) => selectedItemIds.includes(itemId);
-  const sortFn = (itemIdA: any, itemIdB: any) =>
+  const isSelected = (itemId: string) => selectedItemIds.includes(itemId);
+  const sortFn = (itemIdA: string, itemIdB: string) =>
     isSelected(itemIdA) === isSelected(itemIdB)
       ? 0
       : isSelected(itemIdA)
-      ? 1
-      : -1;
+        ? 1
+        : -1;
 
   const [hasPreviouslyAssignedNotes, setHasPreviouslyAssignedNotes] =
     useState(false);
 
-  const handleSelectedChange = (newItems: any) => {
+  const handleSelectedChange = (newItems: Note[]) => {
     if (!Array.isArray(newItems)) {
       return;
     }
@@ -107,17 +111,17 @@ function NotesFormControl({
       return;
     }
 
-    const newTokens = newItems.map(({ id, text }) => {
+    const newTokens = newItems.map(({ id, title }) => {
       const note = allNotes.find((note) => note.id === id);
       return {
         id,
-        text,
+        text: title,
         leadingVisual:
           note?.noteCollectionId === selectedNoteCollection.id
             ? undefined
             : note?.noteCollectionId !== null
-            ? AlertIconOcticon
-            : undefined,
+              ? AlertIconOcticon
+              : undefined,
         sx: { color: 'inherit' },
       };
     });
@@ -182,8 +186,8 @@ function NotesFormControl({
                 note?.noteCollectionId === selectedNoteCollection.id
                   ? undefined
                   : note?.noteCollectionId !== null
-                  ? AlertIconOcticon
-                  : undefined,
+                    ? AlertIconOcticon
+                    : undefined,
               sx: {
                 color: 'inherit',
               },

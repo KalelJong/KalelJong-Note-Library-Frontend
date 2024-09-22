@@ -1,5 +1,5 @@
 import { CloudOfflineIcon } from '@primer/octicons-react';
-import { Box, Button, Heading, Text } from '@primer/react';
+import { Box, Button, Heading } from '@primer/react';
 
 function BlankStateBackendError() {
   return (
@@ -22,15 +22,15 @@ function BlankStateBackendError() {
         <Heading as="h3" className="blankslate-heading">
           Failed to connect to the backend systems.
         </Heading>
-        <Text as="p">
-          It seems we&apos;re having trouble connecting to the backend. Please check
-          your internet connection and try again.
-        </Text>
-        <Box className="blankslate-action">
+        <p>
+          It seems we&apos;re having trouble connecting to the backend. Please
+          check your internet connection and try again.
+        </p>
+        <div className="blankslate-action">
           <Button variant="primary" onClick={() => window.location.reload()}>
             Retry connection
           </Button>
-        </Box>
+        </div>
       </Box>
     </Box>
   );

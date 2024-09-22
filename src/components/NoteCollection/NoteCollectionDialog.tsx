@@ -1,7 +1,7 @@
 import { useNoteCollectionContext } from '@/contexts/note-collection.context';
-import { Box, FormControl, Text, TextInput } from '@primer/react';
+import { Button, FormControl, TextInput } from '@primer/react';
 import { Dialog, DialogButtonProps } from '@primer/react/drafts';
-import { useState } from "react";
+import { useState } from 'react';
 import { Note } from '../../types/note.interface';
 import NotesFormControl from '../Note/NoteFormControl';
 
@@ -104,7 +104,7 @@ function NoteCollectionDialog() {
     noteCollectionDialogType === 'create' ? createdNotes : updatedNotes;
 
   return (
-    <Box onClick={(e) => e.stopPropagation()}>
+    <Button onClick={(e) => e.stopPropagation()}>
       <Dialog
         title={getDialogTitle()}
         subtitle={getDialogSubtitle()}
@@ -112,10 +112,10 @@ function NoteCollectionDialog() {
         onClose={handleCancel}
       >
         {noteCollectionDialogType === 'delete' ? (
-          <Text>
+          <span>
             Are you sure you want to delete this Note Collection and all its
             Notes?
-          </Text>
+          </span>
         ) : (
           <>
             <FormControl>
@@ -140,7 +140,7 @@ function NoteCollectionDialog() {
           </>
         )}
       </Dialog>
-    </Box>
+    </Button>
   );
 }
 
