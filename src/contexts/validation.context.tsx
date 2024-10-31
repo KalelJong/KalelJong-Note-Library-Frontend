@@ -7,7 +7,7 @@ interface ValidationProviderProps {
 }
 
 interface ValidationContextData {
-  useInputValidation: (inputRefs: React.RefObject<HTMLInputElement>[]) => {
+  useInputValidation: (inputRefs: React.RefObject<HTMLInputElement | null>[]) => {
     handleFormSubmit: (submitCallback: () => Promise<void>) => Promise<void>;
     errors: { [key: string]: boolean };
     hasError: (fieldName: string) => boolean;
@@ -31,7 +31,7 @@ export const ValidationProvider: React.FC<ValidationProviderProps> = ({
   children,
 }) => {
   const useInputValidation = (
-    inputRefs: React.RefObject<HTMLInputElement>[]
+    inputRefs: React.RefObject<HTMLInputElement | null>[]
   ) => {
     const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
     const [errorCount, setErrorCount] = useState(0);

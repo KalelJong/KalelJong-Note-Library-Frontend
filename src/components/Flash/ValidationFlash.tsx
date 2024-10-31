@@ -5,7 +5,7 @@ import React from 'react';
 export interface ValidationField {
   key: string;
   title: string;
-  ref: React.RefObject<HTMLInputElement>;
+  ref: React.RefObject<HTMLInputElement | null>;
 }
 
 interface ValidationFlashProps {
@@ -13,7 +13,7 @@ interface ValidationFlashProps {
 }
 
 const ValidationFlash: React.FC<ValidationFlashProps> = ({ fields }) => {
-  const handleClick = (inputRef: React.RefObject<HTMLInputElement>) => {
+  const handleClick = (inputRef: React.RefObject<HTMLInputElement | null>) => {
     inputRef.current?.focus();
   };
 
