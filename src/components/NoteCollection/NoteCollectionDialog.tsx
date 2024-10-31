@@ -1,6 +1,6 @@
 import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { Button, FormControl, TextInput } from '@primer/react';
-import { Dialog, DialogButtonProps } from '@primer/react/drafts';
+import { Dialog, DialogButtonProps } from '@primer/react/experimental';
 import { useState } from 'react';
 import { Note } from '../../types/note.interface';
 import NotesFormControl from '../Note/NoteFormControl';

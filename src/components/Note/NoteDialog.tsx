@@ -1,6 +1,6 @@
 import { useNoteContext } from '@/contexts/note.context';
 import { Button, FormControl, TextInput, Textarea } from '@primer/react';
-import { Dialog, DialogButtonProps } from '@primer/react/drafts';
+import { Dialog, DialogButtonProps } from '@primer/react/experimental';
 import { useState } from 'react';
 
 function NoteDialog() {

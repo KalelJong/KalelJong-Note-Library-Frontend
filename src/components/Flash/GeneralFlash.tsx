@@ -1,12 +1,7 @@
 import { useGeneralContext } from '@/contexts/general.context';
 import { AlertIcon, CheckIcon, XIcon } from '@primer/octicons-react';
-import {
-  Flash,
-  IconButton,
-  Octicon,
-  OcticonProps,
-  Spinner,
-} from '@primer/react';
+import { Flash, IconButton, Spinner } from '@primer/react';
+import { Octicon, OcticonProps } from '@primer/react/deprecated';
 
 const GeneralNotification = () => {
   const { flashVisible, setFlashVisible, flashVariant, flashMessage } =

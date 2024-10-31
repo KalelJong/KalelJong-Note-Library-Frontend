@@ -4,11 +4,11 @@ import { AlertFillIcon } from '@primer/octicons-react';
 import {
   Autocomplete,
   FormControl,
-  Octicon,
   Text,
   TextInputWithTokens,
   Token,
 } from '@primer/react';
+import { Octicon } from '@primer/react/deprecated';
 import { useEffect, useState } from 'react';
 import { InputToken } from '../../types/input-token.interface';
 import { Note } from '../../types/note.interface';

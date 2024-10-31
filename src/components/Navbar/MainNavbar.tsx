@@ -1,5 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
-import { Header, Octicon } from '@primer/react';
+import { Header } from '@primer/react';
+import { Octicon } from '@primer/react/deprecated';
 import AccountActionMenu from '../AccountActionMenu';
 
 const MainNavbar = () => {

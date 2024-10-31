@@ -1,7 +1,7 @@
 import { useNoteCollectionContext } from '@/contexts/note-collection.context';
 import { PencilIcon, TrashIcon } from '@primer/octicons-react';
 import { Box, Button, ButtonGroup, Text } from '@primer/react';
-import { Hidden } from '@primer/react/drafts';
+import { Hidden } from '@primer/react/experimental';
 import { NoteCollection } from '../../types/note-collection.interface';
 import { Note } from '../../types/note.interface';
 import NoteCollectionActionMenu from './NoteCollectionActionMenu';
